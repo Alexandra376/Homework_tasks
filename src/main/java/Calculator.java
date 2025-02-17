@@ -37,6 +37,7 @@ public class Calculator {
 
         } catch (InputMismatchException e) {
             System.out.println("Ошибка: введите корректное число");
+
         } finally {
             scanner.close();
         }
