@@ -1,12 +1,23 @@
 package calculator.operations;
 
-public class Calculator {
-    private final Operation operation;
+import java.util.HashMap;
+import java.util.Map;
 
-    public Calculator(Operation operation) {
-        this.operation = operation;
+public class Calculator {
+    private final Map<String, Operation> operations = new HashMap<>();
+
+    public Calculator() {
+        operations.put("+", new Addition());
+        operations.put("-", new Subtraction());
+        operations.put("*", new Multiplication());
+        operations.put("/", new Division());
     }
-    public double calculate(double a, double b) {
+
+    public double calculate(String operator, double a, double b) {
+        Operation operation = operations.get(operator);
+        if (operation == null) {
+            throw new IllegalArgumentException("Некорректная операция: " + operator);
+        }
         return operation.execute(a, b);
     }
 }
